@@ -29,7 +29,7 @@ test_dataset = AlzheimerDataset(csv_file = "test_data.csv", root_dir="test", tra
 test_loader = DataLoader(dataset= test_dataset, batch_size=batch, shuffle=True)
 
 #Model 
-"""
+
 model = torchvision.models.googlenet(pretrained=True)
 model.to(device)
 
@@ -78,4 +78,4 @@ chech_accuracy(train_loader, model)
 
 print("Mirar en test")
 chech_accuracy(test_loader, model)
-""" 
+
