@@ -34,7 +34,7 @@ def get_train_valid_loader(valid_csv, data_train_dir, data_valid_dir, batch_size
     return (train_loader, valid_loader)
 
 def get_test_loader(data_test_dir,batch_size,shuffle=True):
-    normalize = transforms.Normalize(mean=[0.485, 0.456, 0.406],std=[0.229, 0.224, 0.225],)
+    normalize = transforms.Normalize((0.5), (0.5))
 
     # define transform
     test_transform = transforms.Compose([transforms.ToPILImage(),transforms.Resize((227,227)),transforms.ToTensor(),normalize,])
