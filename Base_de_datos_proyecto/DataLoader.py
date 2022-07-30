@@ -8,7 +8,7 @@ from torch.utils.data import DataLoader
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 def get_train_valid_loader(valid_csv, data_train_dir, data_valid_dir, batch_size,augment,random_seed,shuffle=True):
-    normalize = transforms.Normalize(mean=[0.4914, 0.4822, 0.4465],std=[0.2023, 0.1994, 0.2010],)
+    normalize = transforms.Normalize((0.5), (0.5))
     # define transforms
     if augment:
         train_transform = transforms.Compose([transforms.RandomCrop(32, padding=4),transforms.RandomHorizontalFlip(),transforms.ToTensor(),normalize,])
