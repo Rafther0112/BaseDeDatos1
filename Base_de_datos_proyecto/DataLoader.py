@@ -14,8 +14,8 @@ def get_train_valid_loader(valid_csv, data_train_dir, data_valid_dir, batch_size
         train_transform = transforms.Compose([transforms.RandomCrop(32, padding=4),transforms.RandomHorizontalFlip(),transforms.ToTensor(),normalize,])
         valid_transform = transforms.Compose([transforms.RandomCrop(32, padding=4),transforms.RandomHorizontalFlip(),transforms.ToTensor(),normalize,])
     else:
-        train_transform = transforms.Compose([transforms.Resize((227,227)),transforms.ToTensor(),normalize,])
-        valid_transform = transforms.Compose([transforms.Resize((227,227)),transforms.ToTensor(),normalize,])
+        train_transform = transforms.Compose([transforms.ToPILImage(),transforms.Resize((227,227)),transforms.ToTensor(),normalize,])
+        valid_transform = transforms.Compose([transforms.ToPILImage(),transforms.Resize((227,227)),transforms.ToTensor(),normalize,])
 
     # load the dataset
     valid_dataset = AlzheimerDataset(csv_file= valid_csv, root_dir= data_valid_dir, transform = valid_transform)
@@ -37,7 +37,7 @@ def get_test_loader(data_test_dir,batch_size,shuffle=True):
     normalize = transforms.Normalize(mean=[0.485, 0.456, 0.406],std=[0.229, 0.224, 0.225],)
 
     # define transform
-    test_transform = transforms.Compose([transforms.Resize((227,227)),transforms.ToTensor(),normalize,])
+    test_transform = transforms.Compose([transforms.ToPILImage(),transforms.Resize((227,227)),transforms.ToTensor(),normalize,])
 
     test_dataset = AlzheimerDataset(csv_file = "test_data.csv", root_dir= data_test_dir, transform = test_transform)
     test_loader = DataLoader(dataset= test_dataset, batch_size=batch_size, shuffle=shuffle)
