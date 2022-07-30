@@ -43,12 +43,3 @@ def get_test_loader(data_test_dir,batch_size,shuffle=True):
     test_loader = DataLoader(dataset= test_dataset, batch_size=batch_size, shuffle=shuffle)
 
     return test_loader
-
-#Alzheimer Disease dataset 
-train_loader, valid_loader = get_train_valid_loader(valid_csv= "valid_data.csv", data_train_dir= "train", data_valid_dir="validation", batch_size=32, augment=False, random_seed=True, shuffle=True)
-
-print(f"El dato de entrenamiento es: {train_loader}")
-print(f"El dato de validación es: {valid_loader}")
-
-test_loader = get_test_loader(data_test_dir="test", batch_size=32, shuffle=True)
-print(f"El dato de testeo es: {test_loader}")
