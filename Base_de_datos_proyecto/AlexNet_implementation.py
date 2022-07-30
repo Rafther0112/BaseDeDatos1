@@ -11,7 +11,7 @@ class AlexNet(nn.Module):
     def __init__(self, num_classes=10):
         super(AlexNet, self).__init__()
         self.layer1 = nn.Sequential(
-            nn.Conv2d(3, 96, kernel_size=11, stride=4, padding=0),
+            nn.Conv2d(1, 96, kernel_size=11, stride=4, padding=0),
             nn.BatchNorm2d(96),
             nn.ReLU(),
             nn.MaxPool2d(kernel_size = 3, stride = 2))
@@ -85,11 +85,11 @@ for epoch in tqdm(range(num_epochs)):
         # Move tensors to the configured device
         images = images.to(device)
         labels = labels.to(device)
-        
+        print(88)
         # Forward pass
         outputs = model(images)
         loss = criterion(outputs, labels)
-        
+        print(92)    
         # Backward and optimize
         optimizer.zero_grad()
         loss.backward()
