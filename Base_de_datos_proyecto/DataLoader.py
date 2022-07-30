@@ -7,7 +7,7 @@ from torch.utils.data import DataLoader
 # Device configuration
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
-def get_train_valid_loader(data_train_dir, data_valid_dir, batch_size,augment,random_seed,shuffle=True):
+def get_train_valid_loader(valid_csv, data_train_dir, data_valid_dir, batch_size,augment,random_seed,shuffle=True):
     normalize = transforms.Normalize(mean=[0.4914, 0.4822, 0.4465],std=[0.2023, 0.1994, 0.2010],)
     # define transforms
     if augment:
@@ -18,8 +18,8 @@ def get_train_valid_loader(data_train_dir, data_valid_dir, batch_size,augment,ra
         valid_transform = transforms.Compose([transforms.Resize((227,227)),transforms.ToTensor(),normalize,])
 
     # load the dataset
+    valid_dataset = AlzheimerDataset(csv_file= valid_csv, root_dir= data_valid_dir, transform = valid_transform)
     train_dataset = AlzheimerDataset(csv_file= "train_data.csv", root_dir= data_train_dir, transform = train_transform)
-    valid_dataset = AlzheimerDataset(csv_file="valid_data.csv", root_dir= data_valid_dir, transform = valid_transform)
 
     num_train = len(train_dataset)
     indices = list(range(num_train))
@@ -45,7 +45,7 @@ def get_test_loader(data_test_dir,batch_size,shuffle=True):
     return test_loader
 
 #Alzheimer Disease dataset 
-train_loader, valid_loader = get_train_valid_loader(data_train_dir= "train", data_valid_dir="validation", batch_size=32, augment=False, random_seed=True, shuffle=True)
+train_loader, valid_loader = get_train_valid_loader(valid_csv= "valid_data.csv", data_train_dir= "train", data_valid_dir="validation", batch_size=32, augment=False, random_seed=True, shuffle=True)
 
 print(f"El dato de entrenamiento es: {train_loader}")
 print(f"El dato de validación es: {valid_loader}")

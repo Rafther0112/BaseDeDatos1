@@ -1,3 +1,4 @@
+#%%
 from pickletools import optimize
 import torch
 import torch.nn as nn
@@ -6,7 +7,7 @@ import torchvision.transforms as transforms
 import torchvision
 from torch.utils.data import DataLoader
 from database_generator import AlzheimerDataset
-
+#%%
 #Hyperparameters
 
 batch = 32
@@ -18,7 +19,7 @@ learning_rate = 1e-3
 #Load Data
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-
+#%%
 train_dataset = AlzheimerDataset(csv_file= "train_data.csv", root_dir="train", transform = transforms.ToTensor())
 train_loader = DataLoader(dataset=train_dataset, batch_size=batch, shuffle = True)
 
@@ -27,9 +28,11 @@ valid_loader = DataLoader(dataset=valid_dataset, batch_size=batch, shuffle=True)
 
 test_dataset = AlzheimerDataset(csv_file = "test_data.csv", root_dir="test", transform = transforms.ToTensor())
 test_loader = DataLoader(dataset= test_dataset, batch_size=batch, shuffle=True)
-
+#%%
+print(test_loader)
+#%%
 #Model 
-
+"""
 model = torchvision.models.googlenet(pretrained=True)
 model.to(device)
 
@@ -78,4 +81,4 @@ chech_accuracy(train_loader, model)
 
 print("Mirar en test")
 chech_accuracy(test_loader, model)
-
+"""
