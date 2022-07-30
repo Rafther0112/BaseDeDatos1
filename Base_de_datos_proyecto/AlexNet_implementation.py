@@ -102,7 +102,7 @@ for epoch in tqdm(range(num_epochs)):
     with torch.no_grad():
         correct = 0
         total = 0
-        for images, labels in valid_loader:
+        for images, labels in tqdm(valid_loader):
             images = images.to(device)
             labels = labels.to(device)
             outputs = model(images)
@@ -126,3 +126,4 @@ with torch.no_grad():
         del images, labels, outputs
 
     print('Accuracy of the network on the {} test images: {} %'.format(10000, 100 * correct / total)) 
+# %%
