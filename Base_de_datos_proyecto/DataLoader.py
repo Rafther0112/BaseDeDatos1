@@ -1,9 +1,6 @@
 import numpy as np
 import torch
-import torch.nn as nn
-from torchvision import datasets
 from torchvision import transforms
-from torch.utils.data.sampler import SubsetRandomSampler
 from database_generator import AlzheimerDataset
 from torch.utils.data import DataLoader
 
