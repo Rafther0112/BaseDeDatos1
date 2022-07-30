@@ -2,10 +2,11 @@
 import torch
 import torch.nn as nn
 from DataLoader import get_train_valid_loader, get_test_loader
-
+from tqdm import tqdm
+#%%
 # Device configuration
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-#%%
+
 class AlexNet(nn.Module):
     def __init__(self, num_classes=10):
         super(AlexNet, self).__init__()
@@ -55,34 +56,31 @@ class AlexNet(nn.Module):
         out = self.fc2(out)
         return out
 #%%
-num_classes = 10
-num_epochs = 20
+#Hyperparameters setting
+num_classes = 3
+num_epochs = 10
 batch_size = 64
 learning_rate = 0.005
 
 model = AlexNet(num_classes).to(device)
 
-#Alzheimer Disease dataset 
-train_loader, valid_loader = get_train_valid_loader(valid_csv= "valid_data.csv", data_train_dir= "train", data_valid_dir="validation", batch_size=32, augment=False, random_seed=True, shuffle=True)
-
-print(f"El dato de entrenamiento es: {train_loader}")
-print(f"El dato de validación es: {valid_loader}")
-
-test_loader = get_test_loader(data_test_dir="test", batch_size=32, shuffle=True)
-print(f"El dato de testeo es: {test_loader}")
-
 # Loss and optimizer
 criterion = nn.CrossEntropyLoss()
 optimizer = torch.optim.SGD(model.parameters(), lr=learning_rate, weight_decay = 0.005, momentum = 0.9)  
 
+#Alzheimer Disease dataset 
+train_loader, valid_loader = get_train_valid_loader(valid_csv= "valid_data.csv", data_train_dir= "train", data_valid_dir="validation", batch_size=batch_size, augment=False, random_seed=True, shuffle=True)
+test_loader = get_test_loader(data_test_dir="test", batch_size=batch_size, shuffle=True)
 
+print(f"El dato de entrenamiento es: {train_loader}")
+print(f"El dato de validación es: {valid_loader}")
+print(f"El dato de testeo es: {test_loader}")
+
+#%%
 # Train the model
 total_step = len(train_loader)
-#%%
 
-total_step = len(train_loader)
-
-for epoch in range(num_epochs):
+for epoch in tqdm(range(num_epochs)):
     for i, (images, labels) in enumerate(train_loader):  
         # Move tensors to the configured device
         images = images.to(device)
