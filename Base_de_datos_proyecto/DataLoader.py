@@ -44,8 +44,7 @@ def get_test_loader(data_dir,batch_size,shuffle=True):
 
     return test_loader
 
-
-# CIFAR10 dataset 
+#Alzheimer Disease dataset 
 train_loader, valid_loader = get_train_valid_loader(data_dir = './data', batch_size = 64, augment = False, random_seed = 1)
 
 test_loader = get_test_loader(data_dir = './data', batch_size = 64)
