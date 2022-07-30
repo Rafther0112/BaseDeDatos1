@@ -1,10 +1,6 @@
 #%%
-import numpy as np
 import torch
 import torch.nn as nn
-from torchvision import datasets
-from torchvision import transforms
-from torch.utils.data.sampler import SubsetRandomSampler
 from DataLoader import get_train_valid_loader, get_test_loader
 
 # Device configuration
