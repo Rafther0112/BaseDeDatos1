@@ -1,7 +1,7 @@
 #%%
 import torch
 import torch.nn as nn
-from DataLoader import get_train_valid_loader, get_test_loader
+from DataLoader_VGG import get_train_valid_loader, get_test_loader
 import matplotlib.pyplot as plt
 from tqdm import tqdm
 from train_model_VGG_implementation import train_model
@@ -24,7 +24,7 @@ class VGG16(torch.nn.Module):
         super().__init__()
         
         self.block_1 = torch.nn.Sequential(
-                torch.nn.Conv2d(in_channels=3,
+                torch.nn.Conv2d(in_channels=1,
                                 out_channels=64,
                                 kernel_size=(3, 3),
                                 stride=(1, 1),
@@ -201,3 +201,6 @@ plot_accuracy(train_acc_list=train_acc_list,
               results_dir=None)
 plt.ylim([60, 100])
 plt.show()
+# %%
+
+# %%
