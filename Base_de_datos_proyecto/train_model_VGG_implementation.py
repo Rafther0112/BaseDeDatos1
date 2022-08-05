@@ -1,5 +1,6 @@
 import time
 import torch
+from tqdm import tqdm
 
 def compute_accuracy(model, data_loader, device):
 
@@ -32,7 +33,7 @@ def train_model(model, num_epochs, train_loader,
     for epoch in range(num_epochs):
         model.train()
         contador = 1
-        for batch_idx, (features, targets) in enumerate(train_loader):
+        for batch_idx, (features, targets) in tqdm(enumerate(train_loader)):
             print(contador)
 
             features = features.to(device)
