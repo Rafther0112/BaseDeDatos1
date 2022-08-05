@@ -177,7 +177,6 @@ test_loader = get_test_loader(data_test_dir="test", batch_size=batch_size, shuff
 print(f"El dato de entrenamiento es: {train_loader}")
 print(f"El dato de validación es: {valid_loader}")
 print(f"El dato de testeo es: {test_loader}")
-
 #%%
 # Train the model
 minibatch_loss_list, train_acc_list, valid_acc_list = train_model(
@@ -191,7 +190,7 @@ minibatch_loss_list, train_acc_list, valid_acc_list = train_model(
     scheduler=scheduler,
     scheduler_on='valid_acc',
     logging_interval=100)
-
+#%%
 
 plot_training_loss(minibatch_loss_list=minibatch_loss_list,num_epochs=num_epochs,iter_per_epoch=len(train_loader),results_dir=None,averaging_iterations=200)
 plt.show()
@@ -201,6 +200,4 @@ plot_accuracy(train_acc_list=train_acc_list,
               results_dir=None)
 plt.ylim([60, 100])
 plt.show()
-# %%
-
 # %%

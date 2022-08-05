@@ -30,9 +30,10 @@ def train_model(model, num_epochs, train_loader,
     minibatch_loss_list, train_acc_list, valid_acc_list = [], [], []
     
     for epoch in range(num_epochs):
-
         model.train()
+        contador = 1
         for batch_idx, (features, targets) in enumerate(train_loader):
+            print(contador)
 
             features = features.to(device)
             targets = targets.to(device)
@@ -41,18 +42,16 @@ def train_model(model, num_epochs, train_loader,
             logits = model(features)
             loss = torch.nn.functional.cross_entropy(logits, targets)
             optimizer.zero_grad()
-
             loss.backward()
-
             # ## UPDATE MODEL PARAMETERS
             optimizer.step()
-
             # ## LOGGING
             minibatch_loss_list.append(loss.item())
             if not batch_idx % logging_interval:
                 print(f'Epoch: {epoch+1:03d}/{num_epochs:03d} '
                       f'| Batch {batch_idx:04d}/{len(train_loader):04d} '
                       f'| Loss: {loss:.4f}')
+            contador +=1
 
         model.eval()
         with torch.no_grad():  # save memory during inference
